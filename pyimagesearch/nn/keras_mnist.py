@@ -27,3 +27,4 @@ dataset = datasets.fetch_mldata("MNIST Original")
 data = dataset.data.astype("float") / 255.0
 (trainX, testX, trainY, testY) = train_test_split(data,
     dataset.target, test_size=0.25)
+    #clear it
