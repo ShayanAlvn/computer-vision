@@ -37,14 +37,14 @@ labels = le.fit_transform(labels)
                                     random_state=5)
 
 #loop over our set of regularizers
-for r in (None , "11" , "12"):
+for r in (None , "l1" , "l2"):
     # train a SGD classifier using a softmax loss function and the
     # specified regularization function for 10 epochs
     print("[INFO] training model with `{}` penalty".format(r))
     model = SGDClassifier(loss="log" , penalty=r , max_iter=10 , learning_rate="constant" , eta0=0.01 , random_state=42)
-#train
-model.fit(trainX , trainY)
+    #train
+    model.fit(trainX , trainY)
 
-#evaluate the classifier
-acc = model.score(testX , testY)
-print("[INFO] `{}` penalty accuracy: {:.2f}%".format(r,acc*100))
+    #evaluate the classifier
+    acc = model.score(testX , testY)
+    print("[INFO] `{}` penalty accuracy: {:.2f}%".format(r,acc*100))
