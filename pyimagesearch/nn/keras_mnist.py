@@ -27,4 +27,23 @@ dataset = datasets.fetch_mldata("MNIST Original")
 data = dataset.data.astype("float") / 255.0
 (trainX, testX, trainY, testY) = train_test_split(data,
     dataset.target, test_size=0.25)
-    #clear it
+
+#convert the labels from integers to vectors or one-hot encoding
+lb = LabelBinarizer()
+trainY = lb.fit_transform(trainY)
+testY = lb.transform(testY)
+
+#define the 784-256-128-10 architecture using keras
+model = Sequential()
+model.add(Dense(256 , input_shape=(784,) , activation="sigmoid"))
+model.add(Dense(128, activation="sigmoid"))
+model.add(Dense(10, activation="softmax"))
+
+#train the model using SGD
+print("[INFO] training network...")
+sgd = SGD(0.01)
+model.compile(loss="categorical_crossentropy", optimizer=sgd,
+    metrics=["accuracy"])
+    H = model.fit(trainX, trainY , validation_data=(testX, testY),
+        epochs=100, batch_size==128)
+        
