@@ -24,4 +24,9 @@ class TrainigMonitor(BaseLogger):
                 self.H = json.loads(open(self.jsonPath).read())
 
                 #check to see if a starting epoch was supplied
-                
+                if self.startAt > 0:
+                    #loop over the entries in the history log and
+                    #trim any entries that are past the starting 
+                    #epoch
+                    for k in self.H.keys():
+                        self.H[k] = self.H[k][:self.startAt]
